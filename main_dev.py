@@ -1,4 +1,5 @@
 import flet as ft
+from time import sleep
 
 def main(page:ft.Page):
     page.bgcolor = "blue"
@@ -66,10 +67,22 @@ def main(page:ft.Page):
         border_radius= 16,
         alignment=ft.alignment.center,
         shadow=ft.BoxShadow(blur_radius=10,color=ft.Colors.with_opacity(opacity=0.9,color='black')),
-        content=ft.Text(
-            value="INICIO",
-            color="black",
-            size=32
+        content=ft.Column(
+        [
+            ft.Row([ft.Text("Bem-vindo ao nosso sistema!", size=20, weight="bold", color='black')], alignment=ft.MainAxisAlignment.CENTER),
+            ft.Container(),
+            ft.Row([ft.Text("Ficamos felizes em te ver aqui.", size=15, color='black')], alignment=ft.MainAxisAlignment.CENTER),
+            ft.ElevatedButton("Começar", on_click=lambda e: (
+                _main.content.controls.append(ft.Text("Você clicou no botão!",size=15, color='black')),
+                _main.content.update(),
+                sleep(1),
+                _main.content.controls.pop(-1),
+                _main.content.update(),
+                )),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        spacing=20
         )
     )
     
